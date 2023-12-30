@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noisy Lines Background</title>
+    <link rel="stylesheet" href="C:\Users\armen\Downloads\New folder\app.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="hero">
+            <h1>Noisy Lines<br/>Background</h1>
+            <a target="_blank" href="https://github.com/klevron/threejs-toys">github/threejs-toys</a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="module" src="https://unpkg.com/threejs-toys@0.0.8/build/threejs-toys.module.cdn.min.js"></script>
+<script type="module">
+    import { noisyLinesBackground } from 'https://unpkg.com/threejs-toys@0.0.8/build/threejs-toys.module.cdn.min.js';
+
+    const bg = noisyLinesBackground({
+        el: document.getElementById('app'),
+        colors: [143811, 10932726],
+        minStroke: 0.5,
+        maxStroke: 2,
+        timeCoef: 0.0002,
+        coordScale: 2,
+        displacementScale: 0.02
+    });
+
+    document.body.addEventListener('click', () => {
+        bg.config.colors = [Math.random() * 0xffffff, Math.random() * 0xffffff, Math.random() * 0xffffff];
+        bg.config.minStroke = Math.random() * 2;
+        bg.config.maxStroke = bg.config.minStroke + Math.random() * 5;
+        bg.drawTexture();
+
+        bg.config.timeCoef = 0.000025 + Math.random() * 0.001;
+        bg.uniforms.uCoordScale.value = 0.5 + Math.random() * 4.5;
+        bg.uniforms.uDisplacementScale.value = 0.00025 + Math.random() * 0.01;
+    });
+</script>
+
+</body>
+
+</html>
